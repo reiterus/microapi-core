@@ -29,13 +29,13 @@ class Kernel extends BaseKernel
         ];
     }
 
-    protected function configureContainer(ContainerConfigurator $c): void
+    protected function configureContainer(ContainerConfigurator $container): void
     {
         $dir = dirname(__DIR__);
         $config = $dir.'/config';
 
-        $c->import($config.'/framework.yaml');
-        $c->import($config.'/services.yaml');
+        $container->import($config.'/framework.yaml');
+        $container->import($config.'/services.yaml');
 
         $dotenv = new Dotenv();
         $dotenv->loadEnv($dir.'/.env');

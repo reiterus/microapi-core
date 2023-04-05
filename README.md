@@ -15,6 +15,7 @@ Features of MicroApi Core out of the box:
 - only two configuration files
 - use autoload_runtime.php
 - minimum php version: 8.1
+- JSON response to an exception
 
 #### Join the development of MicroApi!
 

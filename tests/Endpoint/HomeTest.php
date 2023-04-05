@@ -25,5 +25,15 @@ class HomeTest extends ApiWebTestCase
     {
         $client = $this->sendGet('/');
         $this->assertJson($client->getResponse()->getContent());
+        $code = $client->getResponse()->getStatusCode();
+        $this->assertEquals(200, $code);
+    }
+
+    public function test404(): void
+    {
+        $client = $this->sendGet('/fake/url');
+        $this->assertJson($client->getResponse()->getContent());
+        $code = $client->getResponse()->getStatusCode();
+        $this->assertEquals(404, $code);
     }
 }

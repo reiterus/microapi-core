@@ -17,10 +17,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
+/**
+ * @codeCoverageIgnore
+ */
 class Exception implements EventSubscriberInterface
 {
     /**
-     * JSON response on the "kernel.exception" event.
+     * JSON response to the "kernel.exception" event.
      */
     public function onKernelException(ExceptionEvent $event): void
     {
