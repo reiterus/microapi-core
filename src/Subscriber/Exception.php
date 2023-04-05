@@ -43,7 +43,7 @@ class Exception implements EventSubscriberInterface
             'message' => $exception->getMessage(),
         ]);
 
-        $response->setJson($answer);
+        $response->setJson(strval($answer));
         $event->setResponse($response);
     }
 
