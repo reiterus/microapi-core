@@ -24,7 +24,7 @@ class HomeTest extends ApiWebTestCase
     public function testIndex(): void
     {
         $client = $this->sendGet('/');
-        $this->assertJson($client->getResponse()->getContent());
+        $this->assertJson(strval($client->getResponse()->getContent()));
         $code = $client->getResponse()->getStatusCode();
         $this->assertEquals(200, $code);
     }
@@ -32,7 +32,7 @@ class HomeTest extends ApiWebTestCase
     public function test404(): void
     {
         $client = $this->sendGet('/fake/url');
-        $this->assertJson($client->getResponse()->getContent());
+        $this->assertJson(strval($client->getResponse()->getContent()));
         $code = $client->getResponse()->getStatusCode();
         $this->assertEquals(404, $code);
     }

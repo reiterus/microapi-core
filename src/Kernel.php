@@ -22,7 +22,7 @@ class Kernel extends BaseKernel
 {
     use MicroKernelTrait;
 
-    public function registerBundles(): array
+    public function registerBundles(): iterable
     {
         return [
             new FrameworkBundle(),
