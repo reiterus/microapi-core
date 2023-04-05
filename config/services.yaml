@@ -1,0 +1,11 @@
+parameters:
+  welcome: '%env(WELCOME)%'
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  MicroApi\:
+    resource: '../src/'
+    exclude:
+      - '../src/Kernel.php'
