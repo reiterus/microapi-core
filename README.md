@@ -23,6 +23,13 @@ Features of MicroApi Core out of the box:
 
 #### Join the development of MicroApi!
 
+## Makefile commands
+
+- **make phpunit**: run unit tests
+- **make phpfixer**: run php-cs-fixer
+- **make phpstan**: run phpstan
+- **make server**: run built-in php server on port 8008
+
 ## Installation
 You can install the project in two ways
 
