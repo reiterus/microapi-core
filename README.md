@@ -16,6 +16,10 @@ Features of MicroApi Core out of the box:
 - use autoload_runtime.php
 - minimum php version: 8.1
 - JSON response to an exception
+- Makefile
+- quality tools
+  - PHP CS Fixer
+  - PHPStan
 
 #### Join the development of MicroApi!
 
