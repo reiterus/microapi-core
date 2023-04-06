@@ -1,0 +1,29 @@
+version: '3'
+services:
+  web:
+    image: nginx
+    volumes:
+      - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf
+      - .:/var/www/html
+    ports:
+      - "8008:80"
+    restart: on-failure
+    depends_on:
+      - api
+    networks:
+      - microapi
+
+  api:
+    build:
+      context: docker
+    image: microapi:8117
+    restart: on-failure
+    volumes:
+      - ./docker/php.ini:/usr/local/etc/php/conf.d/php.ini
+      - .:/var/www/html
+    networks:
+      - microapi
+
+networks:
+  microapi:
+    driver: bridge
