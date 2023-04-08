@@ -17,14 +17,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class Home extends AbstractController
 {
-    #[Route('/', name: 'api_index')]
+    #[Route('/', name: 'api_home_index')]
     public function index(): JsonResponse
     {
         $welcome = $this->getParameter('welcome');
 
-        return new JsonResponse([
-            'home page',
-            $welcome,
-        ]);
+        return $this->json(['home page', $welcome]);
     }
 }
