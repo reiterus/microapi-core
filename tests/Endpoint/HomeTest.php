@@ -19,20 +19,30 @@ namespace MicroApi\Tests\Endpoint;
 class HomeTest extends ApiWebTestCase
 {
     /**
+     * Test real endpoint.
+     *
      * @covers \MicroApi\Endpoint\Home::index
      */
     public function testIndex(): void
     {
         $client = $this->sendGet('/');
         $this->assertJson(strval($client->getResponse()->getContent()));
+
         $code = $client->getResponse()->getStatusCode();
         $this->assertEquals(200, $code);
+
+        $routeName = $client->getRequest()->attributes->get('_route');
+        $this->assertEquals('api_home_index', $routeName);
     }
 
+    /**
+     * Test fake endpoint.
+     */
     public function test404(): void
     {
-        $client = $this->sendGet('/fake/url');
+        $client = $this->sendGet('/fake/endpoint');
         $this->assertJson(strval($client->getResponse()->getContent()));
+
         $code = $client->getResponse()->getStatusCode();
         $this->assertEquals(404, $code);
     }

@@ -1,5 +1,23 @@
+phpunit:
+	rm -rf var/ && ./vendor/phpunit/phpunit/phpunit && rm -f .phpunit.result.cache
+
+phpfixer:
+	rm -f .php-cs-fixer.cache && ./vendor/bin/php-cs-fixer fix --using-cache=no
+
+phpstan:
+	./vendor/bin/phpstan analyse
+
+server:
+	cd public/ && php -S 127.0.0.1:8008
+
+remover:
+	rm -rf var/ && rm -rf vendor/
+
 docker-start:
 	docker-compose up -d --build && docker-compose exec api composer install
+
+docker-restart:
+	rm -rf var/ && rm -rf vendor/ && docker-compose up -d --build && docker-compose exec api composer install
 
 docker-build:
 	docker-compose up -d --build
@@ -15,24 +33,3 @@ docker-rm:
 
 docker-rmi:
 	docker rmi $$(docker images -aq) -f
-
-docker-phpunit:
-	docker-compose exec api ./vendor/phpunit/phpunit/phpunit
-
-docker-phpfixer:
-	docker-compose exec api ./vendor/bin/php-cs-fixer fix
-
-docker-phpstan:
-	docker-compose exec api ./vendor/bin/phpstan analyse
-
-phpunit:
-	./vendor/phpunit/phpunit/phpunit
-
-phpfixer:
-	./vendor/bin/php-cs-fixer fix
-
-phpstan:
-	./vendor/bin/phpstan analyse
-
-server:
-	cd public/ && php -S 127.0.0.1:8008
