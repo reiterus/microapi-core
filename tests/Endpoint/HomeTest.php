@@ -11,39 +11,46 @@ declare(strict_types=1);
 
 namespace MicroApi\Tests\Endpoint;
 
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+
 /**
  * @covers \MicroApi\Endpoint\Home
  *
  * @internal
  */
-class HomeTest extends ApiWebTestCase
+class HomeTest extends WebTestCase
 {
     /**
-     * Test real endpoint.
+     * @dataProvider dataItems
      *
      * @covers \MicroApi\Endpoint\Home::index
      */
-    public function testIndex(): void
+    public function testIndex(string $uri, string $route, int $statusCode): void
     {
-        $client = $this->sendGet('/');
-        $this->assertJson(strval($client->getResponse()->getContent()));
+        self::ensureKernelShutdown();
+        $client = static::createClient();
 
+        $client->request(method: 'GET', uri: $uri);
         $code = $client->getResponse()->getStatusCode();
-        $this->assertEquals(200, $code);
-
         $routeName = $client->getRequest()->attributes->get('_route');
-        $this->assertEquals('api_home_index', $routeName);
+
+        $this->assertJson(strval($client->getResponse()->getContent()));
+        $this->assertEquals($statusCode, $code);
+        $this->assertEquals($route, $routeName);
     }
 
-    /**
-     * Test fake endpoint.
-     */
-    public function test404(): void
+    public static function dataItems(): \Generator
     {
-        $client = $this->sendGet('/fake/endpoint');
-        $this->assertJson(strval($client->getResponse()->getContent()));
+        yield [
+            'uri' => '/',
+            'route' => 'api_home_index',
+            'status_code' => 200,
+        ];
 
-        $code = $client->getResponse()->getStatusCode();
-        $this->assertEquals(404, $code);
+        yield [
+            'uri' => '/fake/endpoint',
+            'route' => '',
+            'status_code' => 404,
+        ];
     }
 }

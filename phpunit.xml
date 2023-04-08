@@ -11,7 +11,6 @@
     <testsuites>
         <testsuite name="default">
             <directory>tests</directory>
-            <exclude>tests/Endpoint/ApiWebTestCase.php</exclude>
         </testsuite>
     </testsuites>
 
